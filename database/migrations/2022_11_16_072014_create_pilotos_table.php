@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('numero_licencia');
             $table->integer('victorias');
             $table->integer('escuderia_id')->unsigned()->nullable();
-            $table->foreign('escuderia_id')->references('id')->on('escuderias')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('escuderia_id')->references('id')->on('escuderias');
             $table->timestamps();
         });
     }

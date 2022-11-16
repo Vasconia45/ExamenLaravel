@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PilotoController;
+use App\Http\Controllers\EscuderiaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::view('/', 'layouts.main');
+Route::view('/pilot', 'layouts.createpiloto')->name('pilotoshow');
+Route::view('/team', 'layouts.createteam')->name('escuderiashow');
+
+Route::controller(PilotoController::class)->group(function(){
+    Route::post('/pilot/create', 'create')->name('piloto.create');
+    Route::get('/pilot/asign', 'showasign')->name('asignpilottoteamshow');
+    Route::put('/pilot/asign', 'asign')->name('asignpilottoteam');
+});
+
+Route::controller(EscuderiaController::class)->group(function(){
+    Route::get('/', 'main');
+    Route::delete('/team/{id}', 'delete')->name('escuderia.delete');
+    Route::post('/team', 'create')->name('escuderia.create');
 });
